@@ -11,7 +11,7 @@ int main(int argc, char* argv[])
   while(1){
     char input[30];
     char *parse;
-    struct rusage stats;
+    struct rusage cmdinfo;
     char *token[10];
     int commandLen;
 
@@ -47,9 +47,9 @@ int main(int argc, char* argv[])
     
     else {
 	wait(&status);
-	getrusage(RUSAGE_CHILDREN, &stats);
-	printf("Cpu time used: %ld.%06ld sec\n", stats.ru_utime.tv_sec, stats.ru_utime.tv_usec);
-	printf("Context Switches: %ld\n", stats.ru_nivcsw);
+	getrusage(RUSAGE_CHILDREN, &cmdinfo);
+	printf("Cpu time used: %ld.%06ld sec\n", cmdinfo.ru_utime.tv_sec, cmdinfo.ru_utime.tv_usec);
+	printf("Context Switches: %ld\n", cmdinfo.ru_nivcsw);
     }
   }
   printf("Exiting shell..\n");
